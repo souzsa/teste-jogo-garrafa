@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Jogo da Garrafas- Início</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Garrafas Coloridas</h1>
+        <div class="game-controls">
+            <select id="nivel">
+                <option value="1">Fácil (10 tentativas, 90s)</option>
+                <option value="2">Médio (7 tentativas, 60s)</option>
+                <option value="3">Difícil (5 tentativas, 45s)</option>
+            </select>
+            <button id="iniciar">Iniciar Jogo</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('iniciar').addEventListener('click', function() {
+            const nivel = document.getElementById('nivel').value;
+            localStorage.setItem('nivelJogo', nivel);
+            window.location.href = 'jogo.html';
+        });
+    </script>
+</body>
+</html>

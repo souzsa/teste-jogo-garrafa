@@ -1,0 +1,179 @@
+/* ESTILOS GERAIS */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+
+h1 {
+    color: #4b0082;
+    margin-top: 0;
+}
+
+/* BOTÃO VOLTAR */
+.btn-voltar {
+    background: none;
+    border: none;
+    color: #4b0082;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px;
+    transition: all 0.2s;
+}
+
+.btn-voltar:hover {
+    text-decoration: underline;
+    transform: translateX(-3px);
+}
+
+/* ÁREA DO JOGO */
+#dica {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.garrafas-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+/* ESTILOS DAS GARRAFAS */
+.garrafa {
+    width: 100px;
+    height: 180px;
+    background-color: #d3d3d3;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.garrafa::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+.garrafa::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: currentColor;
+    transition: height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+.garrafa.revelada::after {
+    height: 100%;
+}
+
+.garrafa:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* INFORMAÇÕES DO JOGO */
+.info {
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+.info p {
+    margin: 8px 0;
+    color: #333;
+}
+
+#cor-certa {
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#cor-alvo {
+    color: #4b0082;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+    .garrafa {
+        width: 80px;
+        height: 150px;
+    }
+    
+    .garrafas-container {
+        gap: 10px;
+    }
+}
+
+/* Adicione isso ao final do arquivo */
+
+/* CORES DAS GARRAFAS */
+.garrafa {
+    --cor-garrafa: transparent;
+}
+
+.garrafa::after {
+    background-color: var(--cor-garrafa);
+}
+
+/* Estilo para o temporizador */
+#tempo {
+    font-weight: bold;
+    color: #4b0082;
+}
+
+#tempo-num {
+    font-size: 1.2rem;
+}
+
+/* Destaque quando o tempo está acabando */
+.tempo-urgente {
+    color: #ff0000;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
