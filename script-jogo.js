@@ -1,4 +1,4 @@
-const cores = ["Vermelho", "Azul", "Roxo", "Verde", "Amarelo"]; // Remover cores indesejadas
+const cores = ["Vermelho", "Azul", "Roxo", "Verde", "Amarelo"]; // Cores permitidas
 const coresHex = {
     "Vermelho": "#ff0000",
     "Azul": "#0000ff",
@@ -77,7 +77,7 @@ function atualizarTempoDisplay() {
 
 function criarQuadradosPalpite() {
     const container = document.getElementById('palpites-container');
-    container.innerHTML = '';
+    container.innerHTML = '';  // Limpa o container antes de adicionar os quadrados
 
     for (let i = 0; i < 5; i++) {
         const quadrado = document.createElement('div');
@@ -124,14 +124,15 @@ function verificarPalpite() {
     // Verifica se há cores repetidas no palpite
     const coresUnicas = new Set(palpiteAtual);
     if (coresUnicas.size < 5) {
-        // Não exibe o modal, só permite continuar
-        return; // Continuar o jogo, sem modal
+        // Não permite palpites com cores repetidas
+        mostrarModal("Atenção", "Você não pode repetir cores em seu palpite!");
+        return; // Bloqueia a confirmação e não deixa o jogo prosseguir
     }
 
     // Adiciona o palpite à lista de palpites
     palpites.push([...palpiteAtual]);
 
-    // Mostra palpites anteriores
+    // Limpa os palpites anteriores para evitar duplicação
     mostrarPalpitesAnteriores();
 
     // Cria feedback
@@ -196,6 +197,9 @@ function mostrarSolucao() {
 
 function mostrarPalpitesAnteriores() {
     const container = document.getElementById('palpites-anteriores');
+    
+    // Limpar a área de palpites anteriores antes de adicionar novos
+    container.innerHTML = '';
 
     palpites.forEach((palpite, index) => {
         const palpiteDiv = document.createElement('div');
