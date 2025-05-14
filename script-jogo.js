@@ -24,9 +24,21 @@ const tempoElement = document.getElementById('tempo');
 const tentativasElement = document.getElementById('tentativas');
 const confirmarBtn = document.getElementById('confirmar');
 const voltarInicioBtn = document.getElementById('voltar-inicio');
+const modal = document.getElementById('modal');
 
 document.addEventListener('DOMContentLoaded', iniciarJogo);
 confirmarBtn.addEventListener('click', verificarPalpite);
+console.log(modal);
+
+const tipoMessage = modal.getAttribute('tipo');
+console.log(tipoMessage);
+
+if( tipoMessage === 'Atenção'){
+    voltarInicioBtn.addEventListener('click', () => {
+        window.location.href = 'jogo.html';
+    });
+}
+
 voltarInicioBtn.addEventListener('click', () => {
     window.location.href = 'index.html';
 });
@@ -176,6 +188,7 @@ function mostrarModal(titulo, mensagem) {
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalMessage = document.getElementById('modal-message');
+    modal.setAttribute('tipo', titulo);
 
     modalTitle.textContent = titulo;
     modalMessage.textContent = mensagem;
