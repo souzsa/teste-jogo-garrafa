@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #c2d5ff;
+    background-color: #d7e4ff;
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,7 +12,7 @@ body {
 
 .container {
     text-align: center;
-    background-color: rgb(134, 134, 134);
+    background-color: #fffaf4;
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
@@ -28,19 +28,26 @@ body {
     margin-bottom: 1rem;
 }
 
+.titulo1{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-self: center;
+ 
+}
 .timer-container {
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: 5px;
     font-size: 1.2rem;
     font-weight: bold;
     color: #e63946;
-    position: fixed;
 }
 
 h1 {
-    color: #ffffff;
+    color: #000000;
     margin-bottom: 1rem;
+    
 }
 
 .otl {
