@@ -3,24 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descubra as Garrafas</title>
+    <title>Jogo das Garrafas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <button id="voltar" class="btn-voltar">← Voltar</button>
-        <h1>🔎 Descubra as Cores</h1>
-        <p id="dica">Clique nas garrafas para revelar as cores!</p>
+        <div class="game-header">
+            <h1>Jogo das Garrafas</h1>
+            <div class="timer-container">
+                <span>⏱️</span>
+                <span id="tempo">01:30</span>
+            </div>
+        </div>
         
-        <div id="garrafas-container" class="garrafas-container"></div>
+        <p id="dica">Adivinhe a ordem das cores únicas!</p>
         
-        <div class="info">
-            <p id="tentativas">Tentativas restantes: <span id="tentativas-num">10</span></p>
-            <p id="pontuacao">Pontuação: <span id="pontuacao-num">0</span></p>
-            <p id="tempo">Tempo restante: <span id="tempo-num">60</span>s</p>
-            <p id="cor-certa">Encontre: <span id="cor-alvo">?</span></p>
+        <div id="jogo-container">
+            <div id="palpites-anteriores"></div>
+            <div id="palpites-container"></div>
+            <div id="feedback-container"></div>
+        </div>
+        
+        <div class="controles">
+            <button id="confirmar">Confirmar Palpite</button>
+            <p>Tentativas restantes: <span id="tentativas">5</span></p>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Modal de Resultado -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">🎉 Parabéns!</h2>
+            <p id="modal-message">Você acertou a ordem das cores!</p>
+            <div id="solucao-container" class="solucao-container"></div>
+            <div class="modal-stats">
+                <p>Tempo restante: <span id="tempo-restante">00:00</span></p>
+                <p>Tentativas usadas: <span id="tentativas-usadas">0</span>/5</p>
+            </div>
+            <button id="voltar-inicio">Voltar ao Início</button>
+        </div>
+    </div>
+
+    <script src="script-jogo.js"></script>
 </body>
 </html>

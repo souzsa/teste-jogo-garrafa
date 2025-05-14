@@ -3,27 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Jogo da Garrafas- Início</title>
+    <title>Jogo das Garrafas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>🎮 Garrafas Coloridas</h1>
+        <h1>Jogo das Garrafas</h1>
+        
         <div class="game-controls">
+            <div class="info-icon" id="abrir-regras">ℹ️</div>
             <select id="nivel">
-                <option value="1">Fácil (10 tentativas, 90s)</option>
-                <option value="2">Médio (7 tentativas, 60s)</option>
-                <option value="3">Difícil (5 tentativas, 45s)</option>
+                <option value="10,90">Fácil (10 tentativas, 90s)</option>
+                <option value="7,60">Médio (7 tentativas, 60s)</option>
+                <option value="5,45">Difícil (5 tentativas, 45s)</option>
             </select>
             <button id="iniciar">Iniciar Jogo</button>
         </div>
     </div>
-    <script>
-        document.getElementById('iniciar').addEventListener('click', function() {
-            const nivel = document.getElementById('nivel').value;
-            localStorage.setItem('nivelJogo', nivel);
-            window.location.href = 'jogo.html';
-        });
-    </script>
+
+    <!-- Modal de Regras -->
+    <div id="modal-regras" class="modal">
+        <div class="modal-content">
+            <button id="fechar-regras" class="fechar-modal">&times;</button>
+            <h2>📜 Regras do Jogo</h2>
+            <ol>
+                <li>Você precisa descobrir a ordem correta das 5 garrafas coloridas</li>
+                <li>Cada garrafa deve ter uma cor única</li>
+                <li>Após cada tentativa, você receberá feedback:
+                    <ul>
+                        <li><span class="feedback-example certo"></span> Cor certa na posição certa</li>
+                        <li><span class="feedback-example presente"></span> Cor certa na posição errada</li>
+                        <li><span class="feedback-example errado"></span> Cor não está na solução</li>
+                    </ul>
+                </li>
+                <li>Dificuldade MASTER:
+                    <ul>
+                        <li>Fácil: 10 tentativas e 90 segundos</li>
+                        <li>Médio: 7 tentativas e 60 segundos</li>
+                        <li>Difícil: 5 tentativas e 45 segundos</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="script-index.js"></script>
 </body>
 </html>
