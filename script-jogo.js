@@ -1,4 +1,4 @@
-const cores = ["Vermelho", "Azul", "Roxo", "Verde", "Amarelo", "Laranja", "Rosa", "Marrom"];
+const cores = ["Vermelho", "Azul", "Roxo", "Verde", "Amarelo"]; // Remover cores indesejadas
 const coresHex = {
     "Vermelho": "#ff0000",
     "Azul": "#0000ff",
@@ -36,13 +36,13 @@ function iniciarJogo() {
     ordemCorreta = [...cores]
         .sort(() => Math.random() - 0.5)
         .slice(0, 5);
-    
+
     // Inicializar palpite atual (vazio no início)
     palpiteAtual = Array(5).fill(null);
-    
+
     // Iniciar temporizador
     iniciarTemporizador();
-    
+
     criarQuadradosPalpite();
     atualizarUI();
 }
@@ -52,7 +52,7 @@ function iniciarTemporizador() {
     timer = setInterval(() => {
         tempoRestante--;
         atualizarTempoDisplay();
-        
+
         if (tempoRestante <= 0) {
             clearInterval(timer);
             jogoAtivo = false;
@@ -67,7 +67,7 @@ function atualizarTempoDisplay() {
     const minutos = Math.floor(tempoRestante / 60);
     const segundos = tempoRestante % 60;
     tempoElement.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-    
+
     // Mudar cor quando o tempo estiver acabando
     if (tempoRestante <= 10) {
         tempoElement.style.color = "#e63946";
@@ -78,17 +78,17 @@ function atualizarTempoDisplay() {
 function criarQuadradosPalpite() {
     const container = document.getElementById('palpites-container');
     container.innerHTML = '';
-    
+
     for (let i = 0; i < 5; i++) {
         const quadrado = document.createElement('div');
         quadrado.className = 'cor-quadrado';
         quadrado.dataset.index = i;
-        
+
         if (palpiteAtual[i]) {
             quadrado.style.backgroundColor = coresHex[palpiteAtual[i]];
             quadrado.textContent = palpiteAtual[i].charAt(0);
         }
-        
+
         quadrado.addEventListener('click', () => {
             if (jogoAtivo) mudarCorQuadrado(quadrado, i);
         });
@@ -104,15 +104,15 @@ function mudarCorQuadrado(quadrado, index) {
         // Cicla para a próxima cor, garantindo que não repita cores no palpite
         const currentIndex = cores.indexOf(palpiteAtual[index]);
         let nextIndex = (currentIndex + 1) % cores.length;
-        
+
         // Encontra a próxima cor que não está no palpite atual
         while (palpiteAtual.includes(cores[nextIndex]) && palpiteAtual[index] !== cores[nextIndex]) {
             nextIndex = (nextIndex + 1) % cores.length;
         }
-        
+
         palpiteAtual[index] = cores[nextIndex];
     }
-    
+
     // Atualiza a cor visualmente
     quadrado.style.backgroundColor = coresHex[palpiteAtual[index]];
     quadrado.textContent = palpiteAtual[index].charAt(0);
@@ -120,23 +120,23 @@ function mudarCorQuadrado(quadrado, index) {
 
 function verificarPalpite() {
     if (!jogoAtivo || tentativasRestantes <= 0 || palpiteAtual.some(cor => !cor)) return;
-    
+
     // Verifica se há cores repetidas no palpite
     const coresUnicas = new Set(palpiteAtual);
     if (coresUnicas.size < 5) {
-        mostrarModal("Atenção", "Por favor, use cores diferentes em cada garrafa!");
-        return;
+        // Não exibe o modal, só permite continuar
+        return; // Continuar o jogo, sem modal
     }
-    
+
     // Adiciona o palpite à lista de palpites
     palpites.push([...palpiteAtual]);
-    
+
     // Mostra palpites anteriores
     mostrarPalpitesAnteriores();
-    
+
     // Cria feedback
     criarFeedback();
-    
+
     // Verifica se acertou todas as cores
     if (palpiteAtual.every((cor, i) => cor === ordemCorreta[i])) {
         jogoAtivo = false;
@@ -145,17 +145,17 @@ function verificarPalpite() {
             mostrarModal("🎉 Parabéns!", "Você acertou a ordem das cores!");
             mostrarSolucao();
             document.getElementById('confirmar').disabled = true;
-            
+
             // Atualizar estatísticas no modal
             document.getElementById('tempo-restante').textContent = tempoElement.textContent;
             document.getElementById('tentativas-usadas').textContent = maxTentativas - tentativasRestantes + 1;
         }, 300);
         return;
     }
-    
+
     tentativasRestantes--;
     atualizarUI();
-    
+
     if (tentativasRestantes === 0) {
         jogoAtivo = false;
         clearInterval(timer);
@@ -175,7 +175,7 @@ function mostrarModal(titulo, mensagem) {
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalMessage = document.getElementById('modal-message');
-    
+
     modalTitle.textContent = titulo;
     modalMessage.textContent = mensagem;
     modal.style.display = 'flex';
@@ -184,7 +184,7 @@ function mostrarModal(titulo, mensagem) {
 function mostrarSolucao() {
     const container = document.getElementById('solucao-container');
     container.innerHTML = '<p style="margin-bottom: 15px; width: 100%;">A ordem correta era:</p>';
-    
+
     ordemCorreta.forEach(cor => {
         const item = document.createElement('div');
         item.className = 'cor-quadrado';
@@ -196,7 +196,7 @@ function mostrarSolucao() {
 
 function mostrarPalpitesAnteriores() {
     const container = document.getElementById('palpites-anteriores');
-    
+
     palpites.forEach((palpite, index) => {
         const palpiteDiv = document.createElement('div');
         palpiteDiv.className = 'feedback';
@@ -204,7 +204,7 @@ function mostrarPalpitesAnteriores() {
         palpiteDiv.style.display = 'flex';
         palpiteDiv.style.gap = '12px';
         palpiteDiv.style.justifyContent = 'center';
-        
+
         palpite.forEach(cor => {
             const item = document.createElement('div');
             item.className = 'cor-quadrado';
@@ -212,7 +212,7 @@ function mostrarPalpitesAnteriores() {
             item.textContent = cor.charAt(0);
             palpiteDiv.appendChild(item);
         });
-        
+
         container.appendChild(palpiteDiv);
     });
 }
@@ -222,11 +222,11 @@ function criarFeedback() {
     const feedbackDiv = document.createElement('div');
     feedbackDiv.className = 'feedback';
     feedbackDiv.style.margin = '10px 0';
-    
+
     for (let i = 0; i < 5; i++) {
         const feedbackItem = document.createElement('div');
         feedbackItem.className = 'feedback-item';
-        
+
         if (palpiteAtual[i] === ordemCorreta[i]) {
             feedbackItem.classList.add('certo');
         } else if (ordemCorreta.includes(palpiteAtual[i])) {
@@ -234,16 +234,16 @@ function criarFeedback() {
         } else {
             feedbackItem.classList.add('errado');
         }
-        
+
         feedbackDiv.appendChild(feedbackItem);
     }
-    
+
     feedbackContainer.appendChild(feedbackDiv);
 }
 
 function atualizarUI() {
     tentativasElement.textContent = tentativasRestantes;
-    
+
     // Mudar cor quando as tentativas estiverem acabando
     if (tentativasRestantes <= 2) {
         tentativasElement.style.color = "#e63946";

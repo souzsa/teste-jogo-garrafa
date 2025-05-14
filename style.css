@@ -311,3 +311,39 @@ select:focus {
     margin-right: 5px;
     vertical-align: middle;
 }
+.aviso-flutuante {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffcc00;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    animation: slideDown 0.3s ease-out;
+    text-align: center;
+    max-width: 80%;
+}
+
+.aviso-flutuante h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+
+.aviso-flutuante p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+        opacity: 0;
+    }
+    to {
+        top: 20px;
+        opacity: 1;
+    }
+}
