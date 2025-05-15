@@ -109,9 +109,18 @@ function criarQuadradosPalpite() {
 }
 
 function mudarCorQuadrado(quadrado, index) {
-    // Se for o primeiro clique ou não tiver cor, começa com Vermelho
+    // Se for o primeiro clique ou não tiver cor, começa com uma cor aleatória
     if (!palpiteAtual[index]) {
-        palpiteAtual[index] = "Vermelho";
+        // Filtra as cores que ainda não estão no palpite atual
+        const coresDisponiveis = cores.filter(cor => !palpiteAtual.includes(cor));
+        
+        // Se houver cores disponíveis, escolhe uma aleatória
+        if (coresDisponiveis.length > 0) {
+            palpiteAtual[index] = coresDisponiveis[Math.floor(Math.random() * coresDisponiveis.length)];
+        } else {
+            // Se todas as cores já estiverem no palpite, escolhe qualquer uma aleatoriamente
+            palpiteAtual[index] = cores[Math.floor(Math.random() * cores.length)];
+        }
     } else {
         // Cicla para a próxima cor, garantindo que não repita cores no palpite
         const currentIndex = cores.indexOf(palpiteAtual[index]);

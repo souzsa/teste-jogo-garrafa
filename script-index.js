@@ -4,24 +4,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalRegras = document.getElementById('modal-regras');
     const iniciarBtn = document.getElementById('iniciar');
 
-    // Abrir modal de regras
+    // Abre modal regras
     abrirRegras.addEventListener('click', function() {
         modalRegras.style.display = 'flex';
     });
 
-    // Fechar modal de regras
+    // Fecha modal  regras
     fecharRegras.addEventListener('click', function() {
         modalRegras.style.display = 'none';
     });
 
-    // Fechar modal ao clicar fora
+    // Fecha modal ao clicar fora
     modalRegras.addEventListener('click', function(e) {
         if (e.target === modalRegras) {
             modalRegras.style.display = 'none';
         }
     });
 
-    // Iniciar jogo
+   
     iniciarBtn.addEventListener('click', function() {
         const nivel = document.getElementById('nivel').value;
         localStorage.setItem('configJogo', nivel);
