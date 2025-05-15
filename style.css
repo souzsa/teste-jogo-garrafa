@@ -199,7 +199,7 @@ select:focus {
     position: absolute;
     top: -10px;
     right: -10px;
-    background-color: #ff0000;;
+    background-color: #ff0000;
     color: white;
     width: 30px;
     height: 30px;
@@ -216,7 +216,7 @@ select:focus {
 
 .info-icon:hover {
     transform: scale(1.1);
-    background-color: #b12525;;
+    background-color: #b12525;
     color: #d9d9d9;
 }
 
